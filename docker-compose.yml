@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  app:
+    container_name: app
+    image: node:18-alpine
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: >
+      sh -c "
+        yarn &&
+        yarn start
+      "
+
+  db:
+    container_name: db
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
