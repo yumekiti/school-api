@@ -1,10 +1,14 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 @ObjectType()
 export class User {
-  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  @Field(() => Int, { description: 'ID' })
   id: number;
 
-  @Field(() => Int, { description: '学籍番号' })
+  @Column()
+  @Field(() => Number, { description: 'Student number' })
   studentNumber: number;
 }
