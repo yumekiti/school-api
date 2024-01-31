@@ -13,9 +13,16 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
+input Pagination {
+  limit: Int
+  page: Int! = 1
+  pageSize: Int! = 10
+  start: Int
+}
+
 type Query {
   user(id: Int!): User!
-  users: [User!]!
+  users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
 }
 
 input UpdateUserInput {

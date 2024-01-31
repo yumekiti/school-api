@@ -4,6 +4,8 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PaginationArgs } from './dto/pagination.args';
+import { SortArgs } from './dto/sort.args';
 
 @Injectable()
 export class UsersService {
@@ -16,8 +18,16 @@ export class UsersService {
     return await this.userRepository.save(createUserInput);
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+  async findAll(paginationArgs: PaginationArgs, sortArgs: SortArgs): Promise<User[]> {
+    const { page, pageSize, start, limit } = paginationArgs.pagination;
+    const { sort } = sortArgs;
+    return await this.userRepository.find({
+      order: {
+        [sort.split(':')[0]]: sort.split(':')[1],
+      },
+      skip: start ? start : (page - 1) * pageSize,
+      take: limit ? limit : pageSize,
+    });
   }
 
   async findOne(id: number): Promise<User> {

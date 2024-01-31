@@ -3,6 +3,8 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { PaginationArgs } from './dto/pagination.args';
+import { SortArgs } from './dto/sort.args';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -14,8 +16,11 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll() {
-    return this.usersService.findAll();
+  findAll(
+    @Args() paginationArgs: PaginationArgs,
+    @Args() sortArgs: SortArgs,
+  ) {
+    return this.usersService.findAll(paginationArgs, sortArgs);
   }
 
   @Query(() => User, { name: 'user' })
