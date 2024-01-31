@@ -18,6 +18,12 @@ type AccessPoint {
   """ID"""
   id: Int!
 
+  """部屋"""
+  room: Room!
+
+  """部屋 ID"""
+  room_id: Int!
+
   """Updated at"""
   updated_at: DateTime!
 
@@ -38,13 +44,16 @@ input CreateAccessPointInput {
   """周波数"""
   frequency: Int!
 
+  """部屋"""
+  room: CreateRoomInput!
+
   """WiFi"""
   wifi: CreateWifiNetworkInput!
 }
 
 input CreateRoomInput {
   """部屋名"""
-  name: String!
+  room_name: String!
 }
 
 input CreateUserInput {
@@ -109,7 +118,7 @@ type Query {
 
 type Room {
   """アクセスポイント"""
-  accessPoints: [AccessPoint!]!
+  access_points: [AccessPoint!]!
 
   """Created at"""
   created_at: DateTime!
@@ -118,7 +127,7 @@ type Room {
   id: Int!
 
   """部屋名"""
-  name: String!
+  room_name: String!
 
   """Updated at"""
   updated_at: DateTime!
@@ -135,6 +144,9 @@ input UpdateAccessPointInput {
   frequency: Int
   id: Int!
 
+  """部屋"""
+  room: CreateRoomInput
+
   """WiFi"""
   wifi: CreateWifiNetworkInput
 }
@@ -143,7 +155,7 @@ input UpdateRoomInput {
   id: Int!
 
   """部屋名"""
-  name: String
+  room_name: String
 }
 
 input UpdateUserInput {
@@ -192,7 +204,7 @@ type User {
 
 type WifiNetwork {
   """アクセスポイント"""
-  accessPoints: [AccessPoint!]!
+  access_points: [AccessPoint!]!
 
   """Created at"""
   created_at: DateTime!

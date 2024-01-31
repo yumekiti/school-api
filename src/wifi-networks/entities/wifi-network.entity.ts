@@ -52,5 +52,5 @@ export class WifiNetwork {
   updated_at: Date;
 
   @Field(() => [AccessPoint], { description: 'アクセスポイント' })
-  accessPoints: AccessPoint[];
+  access_points: AccessPoint[];
 }

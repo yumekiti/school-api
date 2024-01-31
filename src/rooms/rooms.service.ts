@@ -34,4 +34,8 @@ export class RoomsService {
     this.roomsRepository.delete({ id });
     return room;
   }
+
+  findOneByName(room_name: string): Promise<Room> {
+    return this.roomsRepository.findOne({ where: { room_name } });
+  }
 }

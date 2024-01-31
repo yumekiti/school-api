@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 import { AccessPoint } from 'src/access-points/entities/access-point.entity';
 
@@ -22,10 +23,10 @@ export class Room {
 
   @Column()
   @Field(() => String, { description: '部屋名' })
-  name: string;
+  room_name: string;
 
   @Field(() => [AccessPoint], { description: 'アクセスポイント' })
-  accessPoints: AccessPoint[];
+  access_points: AccessPoint[];
 
   @CreateDateColumn()
   @Field(() => Date, { description: 'Created at' })

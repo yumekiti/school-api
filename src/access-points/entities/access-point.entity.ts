@@ -9,6 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { Room } from 'src/rooms/entities/room.entity';
 
 /*
 - アクセスポイントID (access_point_id) - 主キー
@@ -37,10 +38,19 @@ export class AccessPoint {
   @Field(() => Int, { description: '周波数' })
   frequency: number;
 
-  @ManyToOne(() => WifiNetwork, (wifiNetwork) => wifiNetwork.accessPoints)
+  @ManyToOne(() => WifiNetwork, (wifiNetwork) => wifiNetwork.access_points)
   @JoinColumn({ name: 'wifi_id' })
   @Field(() => WifiNetwork, { description: 'WiFi' })
   wifi: WifiNetwork;
+
+  @ManyToOne(() => Room, (room) => room.access_points)
+  @JoinColumn({ name: 'room_id' })
+  @Field(() => Room, { description: '部屋' })
+  room: Room;
+
+  @Column()
+  @Field(() => Int, { description: '部屋 ID' })
+  room_id: number;
 
   @Column()
   @Field(() => Int, { description: 'WiFi ID' })

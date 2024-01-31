@@ -1,5 +1,6 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
 import { CreateWifiNetworkInput } from 'src/wifi-networks/dto/create-wifi-network.input';
+import { CreateRoomInput } from 'src/rooms/dto/create-room.input';
 
 @InputType()
 export class CreateAccessPointInput {
@@ -14,4 +15,7 @@ export class CreateAccessPointInput {
 
   @Field(() => CreateWifiNetworkInput, { description: 'WiFi' })
   wifi: CreateWifiNetworkInput;
+
+  @Field(() => CreateRoomInput, { description: '部屋' })
+  room: CreateRoomInput;
 }

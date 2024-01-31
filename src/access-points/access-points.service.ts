@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AccessPoint } from './entities/access-point.entity';
 import { WifiNetworksService } from '../wifi-networks/wifi-networks.service';
+import { RoomsService } from 'src/rooms/rooms.service';
 
 @Injectable()
 export class AccessPointsService {
@@ -12,34 +13,40 @@ export class AccessPointsService {
     @InjectRepository(AccessPoint)
     private accessPointRepository: Repository<AccessPoint>,
     private readonly wifiNetworksService: WifiNetworksService,
+    private readonly roomsService: RoomsService,
   ) {}
 
   async create(
     createAccessPointInput: CreateAccessPointInput,
   ): Promise<AccessPoint> {
     const { ssid } = createAccessPointInput.wifi;
+    const { room_name } = createAccessPointInput.room;
 
-    let wifiNetwork = await this.wifiNetworksService.findOneBySsid(ssid);
-    if (!wifiNetwork) {
-      wifiNetwork = await this.wifiNetworksService.create(
-        createAccessPointInput.wifi,
-      );
+    let room = await this.roomsService.findOneByName(room_name);
+    if (!room) {
+      room = await this.roomsService.create(createAccessPointInput.room);
+    }
+
+    let wifi = await this.wifiNetworksService.findOneBySsid(ssid);
+    if (!wifi) {
+      wifi = await this.wifiNetworksService.create(createAccessPointInput.wifi);
     }
 
     return await this.accessPointRepository.save({
       ...createAccessPointInput,
-      wifi: wifiNetwork,
+      room,
+      wifi,
     });
   }
 
   findAll(): Promise<AccessPoint[]> {
-    return this.accessPointRepository.find({ relations: ['wifi'] });
+    return this.accessPointRepository.find({ relations: ['wifi', 'room'] });
   }
 
   findOne(id: number): Promise<AccessPoint> {
     return this.accessPointRepository.findOne({
       where: { id },
-      relations: ['wifi'],
+      relations: ['wifi', 'room'],
     });
   }
 
@@ -50,14 +57,14 @@ export class AccessPointsService {
     this.accessPointRepository.update({ id }, updateAccessPointInput);
     return this.accessPointRepository.findOne({
       where: { id },
-      relations: ['wifi'],
+      relations: ['wifi', 'room'],
     });
   }
 
   remove(id: number): Promise<AccessPoint> {
     const accessPoint = this.accessPointRepository.findOne({
       where: { id },
-      relations: ['wifi'],
+      relations: ['wifi', 'room'],
     });
     this.accessPointRepository.delete({ id });
     return accessPoint;
