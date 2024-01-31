@@ -7,6 +7,23 @@ input CreateUserInput {
   schoolNumber: Float!
 }
 
+input CreateWifiNetworkInput {
+  """インターフェース"""
+  iface: String!
+
+  """モデル"""
+  model: String!
+
+  """セキュリティ"""
+  security: String!
+
+  """SSID"""
+  ssid: String!
+
+  """タイプ"""
+  type: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -14,8 +31,11 @@ scalar DateTime
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
+  createWifiNetwork(createWifiNetworkInput: CreateWifiNetworkInput!): WifiNetwork!
   removeUser(id: Int!): User!
+  removeWifiNetwork(id: Int!): WifiNetwork!
   updateUser(updateUserInput: UpdateUserInput!): User!
+  updateWifiNetwork(updateWifiNetworkInput: UpdateWifiNetworkInput!): WifiNetwork!
 }
 
 input Pagination {
@@ -28,6 +48,8 @@ input Pagination {
 type Query {
   user(id: Int!): User!
   users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
+  wifiNetwork(id: Int!): WifiNetwork!
+  wifiNetworks: [WifiNetwork!]!
 }
 
 input UpdateUserInput {
@@ -36,6 +58,25 @@ input UpdateUserInput {
 
   """Student number"""
   schoolNumber: Float
+}
+
+input UpdateWifiNetworkInput {
+  id: Int!
+
+  """インターフェース"""
+  iface: String
+
+  """モデル"""
+  model: String
+
+  """セキュリティ"""
+  security: String
+
+  """SSID"""
+  ssid: String
+
+  """タイプ"""
+  type: String
 }
 
 type User {
@@ -50,6 +91,32 @@ type User {
 
   """School number"""
   schoolNumber: Int!
+
+  """Updated at"""
+  updated_at: DateTime!
+}
+
+type WifiNetwork {
+  """Created at"""
+  created_at: DateTime!
+
+  """ID"""
+  id: Int!
+
+  """インターフェース"""
+  iface: String!
+
+  """モデル"""
+  model: String!
+
+  """セキュリティ"""
+  security: String!
+
+  """SSID"""
+  ssid: String!
+
+  """タイプ"""
+  type: String!
 
   """Updated at"""
   updated_at: DateTime!

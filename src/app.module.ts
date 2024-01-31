@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { WifiNetworksModule } from './wifi-networks/wifi-networks.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       sortSchema: true,
     }),
     UsersModule,
+    WifiNetworksModule,
   ],
 })
 export class AppModule {}
