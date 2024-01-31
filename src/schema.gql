@@ -2,6 +2,46 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AccessPoint {
+  """BSSID"""
+  bssid: String!
+
+  """チャンネル"""
+  channel: Int!
+
+  """Created at"""
+  created_at: DateTime!
+
+  """周波数"""
+  frequency: Int!
+
+  """ID"""
+  id: Int!
+
+  """Updated at"""
+  updated_at: DateTime!
+
+  """WiFi"""
+  wifi: WifiNetwork!
+
+  """WiFi ID"""
+  wifi_id: Int!
+}
+
+input CreateAccessPointInput {
+  """BSSID"""
+  bssid: String!
+
+  """チャンネル"""
+  channel: Int!
+
+  """周波数"""
+  frequency: Int!
+
+  """WiFi"""
+  wifi: CreateWifiNetworkInput!
+}
+
 input CreateUserInput {
   """Student number"""
   schoolNumber: Float!
@@ -30,10 +70,13 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Mutation {
+  createAccessPoint(createAccessPointInput: CreateAccessPointInput!): AccessPoint!
   createUser(createUserInput: CreateUserInput!): User!
   createWifiNetwork(createWifiNetworkInput: CreateWifiNetworkInput!): WifiNetwork!
+  removeAccessPoint(id: Int!): AccessPoint!
   removeUser(id: Int!): User!
   removeWifiNetwork(id: Int!): WifiNetwork!
+  updateAccessPoint(updateAccessPointInput: UpdateAccessPointInput!): AccessPoint!
   updateUser(updateUserInput: UpdateUserInput!): User!
   updateWifiNetwork(updateWifiNetworkInput: UpdateWifiNetworkInput!): WifiNetwork!
 }
@@ -46,10 +89,27 @@ input Pagination {
 }
 
 type Query {
+  accessPoint(id: Int!): AccessPoint!
+  accessPoints: [AccessPoint!]!
   user(id: Int!): User!
   users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
   wifiNetwork(id: Int!): WifiNetwork!
   wifiNetworks: [WifiNetwork!]!
+}
+
+input UpdateAccessPointInput {
+  """BSSID"""
+  bssid: String
+
+  """チャンネル"""
+  channel: Int
+
+  """周波数"""
+  frequency: Int
+  id: Int!
+
+  """WiFi"""
+  wifi: CreateWifiNetworkInput
 }
 
 input UpdateUserInput {
@@ -97,6 +157,9 @@ type User {
 }
 
 type WifiNetwork {
+  """アクセスポイント"""
+  accessPoints: [AccessPoint!]!
+
   """Created at"""
   created_at: DateTime!
 

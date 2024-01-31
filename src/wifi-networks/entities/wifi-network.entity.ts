@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { AccessPoint } from 'src/access-points/entities/access-point.entity';
 
 /*
 - インターフェース (iface)
@@ -43,4 +44,7 @@ export class WifiNetwork {
   @UpdateDateColumn()
   @Field(() => Date, { description: 'Updated at' })
   updated_at: Date;
+
+  @Field(() => [AccessPoint], { description: 'アクセスポイント' })
+  accessPoints: AccessPoint[];
 }

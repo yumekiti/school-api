@@ -7,5 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([WifiNetwork])],
   providers: [WifiNetworksResolver, WifiNetworksService],
+  exports: [WifiNetworksService],
 })
 export class WifiNetworksModule {}

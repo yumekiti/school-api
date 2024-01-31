@@ -5,6 +5,7 @@ import { join } from 'path';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WifiNetworksModule } from './wifi-networks/wifi-networks.module';
+import { AccessPointsModule } from './access-points/access-points.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { WifiNetworksModule } from './wifi-networks/wifi-networks.module';
     }),
     UsersModule,
     WifiNetworksModule,
+    AccessPointsModule,
   ],
 })
 export class AppModule {}
