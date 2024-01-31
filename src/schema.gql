@@ -42,6 +42,11 @@ input CreateAccessPointInput {
   wifi: CreateWifiNetworkInput!
 }
 
+input CreateRoomInput {
+  """部屋名"""
+  name: String!
+}
+
 input CreateUserInput {
   """Student number"""
   schoolNumber: Float!
@@ -71,12 +76,15 @@ scalar DateTime
 
 type Mutation {
   createAccessPoint(createAccessPointInput: CreateAccessPointInput!): AccessPoint!
+  createRoom(createRoomInput: CreateRoomInput!): Room!
   createUser(createUserInput: CreateUserInput!): User!
   createWifiNetwork(createWifiNetworkInput: CreateWifiNetworkInput!): WifiNetwork!
   removeAccessPoint(id: Int!): AccessPoint!
+  removeRoom(id: Int!): Room!
   removeUser(id: Int!): User!
   removeWifiNetwork(id: Int!): WifiNetwork!
   updateAccessPoint(updateAccessPointInput: UpdateAccessPointInput!): AccessPoint!
+  updateRoom(updateRoomInput: UpdateRoomInput!): Room!
   updateUser(updateUserInput: UpdateUserInput!): User!
   updateWifiNetwork(updateWifiNetworkInput: UpdateWifiNetworkInput!): WifiNetwork!
 }
@@ -91,10 +99,29 @@ input Pagination {
 type Query {
   accessPoint(id: Int!): AccessPoint!
   accessPoints: [AccessPoint!]!
+  room(id: Int!): Room!
+  rooms: [Room!]!
   user(id: Int!): User!
   users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
   wifiNetwork(id: Int!): WifiNetwork!
   wifiNetworks: [WifiNetwork!]!
+}
+
+type Room {
+  """アクセスポイント"""
+  accessPoints: [AccessPoint!]!
+
+  """Created at"""
+  created_at: DateTime!
+
+  """ID"""
+  id: Int!
+
+  """部屋名"""
+  name: String!
+
+  """Updated at"""
+  updated_at: DateTime!
 }
 
 input UpdateAccessPointInput {
@@ -110,6 +137,13 @@ input UpdateAccessPointInput {
 
   """WiFi"""
   wifi: CreateWifiNetworkInput
+}
+
+input UpdateRoomInput {
+  id: Int!
+
+  """部屋名"""
+  name: String
 }
 
 input UpdateUserInput {
