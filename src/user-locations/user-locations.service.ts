@@ -14,12 +14,16 @@ export class UserLocationsService {
     private readonly accessPointsService: AccessPointsService,
   ) {}
 
-  async create(createUserLocationInput: CreateUserLocationInput): Promise<UserLocation> {
+  async create(
+    createUserLocationInput: CreateUserLocationInput,
+  ): Promise<UserLocation> {
     const { bssid } = createUserLocationInput.access_point;
 
     let access_point = await this.accessPointsService.findOneByBssid(bssid);
     if (!access_point) {
-      access_point = await this.accessPointsService.create(createUserLocationInput.access_point);
+      access_point = await this.accessPointsService.create(
+        createUserLocationInput.access_point,
+      );
     }
 
     return await this.userLocationRepository.save({
@@ -40,7 +44,10 @@ export class UserLocationsService {
     });
   }
 
-  update(id: number, updateUserLocationInput: UpdateUserLocationInput): Promise<UserLocation> {
+  update(
+    id: number,
+    updateUserLocationInput: UpdateUserLocationInput,
+  ): Promise<UserLocation> {
     this.userLocationRepository.update({ id }, updateUserLocationInput);
     return this.userLocationRepository.findOne({
       where: { id },

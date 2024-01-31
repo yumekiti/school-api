@@ -9,7 +9,10 @@ export class UserLocationsResolver {
   constructor(private readonly userLocationsService: UserLocationsService) {}
 
   @Mutation(() => UserLocation)
-  createUserLocation(@Args('createUserLocationInput') createUserLocationInput: CreateUserLocationInput) {
+  createUserLocation(
+    @Args('createUserLocationInput')
+    createUserLocationInput: CreateUserLocationInput,
+  ) {
     return this.userLocationsService.create(createUserLocationInput);
   }
 
@@ -24,8 +27,14 @@ export class UserLocationsResolver {
   }
 
   @Mutation(() => UserLocation)
-  updateUserLocation(@Args('updateUserLocationInput') updateUserLocationInput: UpdateUserLocationInput) {
-    return this.userLocationsService.update(updateUserLocationInput.id, updateUserLocationInput);
+  updateUserLocation(
+    @Args('updateUserLocationInput')
+    updateUserLocationInput: UpdateUserLocationInput,
+  ) {
+    return this.userLocationsService.update(
+      updateUserLocationInput.id,
+      updateUserLocationInput,
+    );
   }
 
   @Mutation(() => UserLocation)
