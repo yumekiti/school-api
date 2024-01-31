@@ -4,7 +4,7 @@
 
 input CreateUserInput {
   """Student number"""
-  studentNumber: Float!
+  schoolNumber: Float!
 }
 
 type Mutation {
@@ -20,15 +20,19 @@ type Query {
 
 input UpdateUserInput {
   id: Int!
+  location_visibility: Boolean
 
   """Student number"""
-  studentNumber: Float
+  schoolNumber: Float
 }
 
 type User {
   """ID"""
   id: Int!
 
-  """Student number"""
-  studentNumber: Float!
+  """Location visibility"""
+  location_visibility: Boolean!
+
+  """School number"""
+  schoolNumber: Int!
 }

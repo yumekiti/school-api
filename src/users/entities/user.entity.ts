@@ -9,6 +9,10 @@ export class User {
   id: number;
 
   @Column()
-  @Field(() => Number, { description: 'Student number' })
-  studentNumber: number;
+  @Field(() => Int, { description: 'School number' })
+  schoolNumber: number;
+
+  @Column({ default: false }) // Set a default value for location_visibility if needed
+  @Field(() => Boolean, { description: 'Location visibility' })
+  location_visibility: boolean;
 }

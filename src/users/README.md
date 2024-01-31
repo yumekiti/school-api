@@ -1,46 +1,48 @@
 ## 検証用
 
-```
+```graphql
 # ユーザーを取得するクエリ
 query getUsers {
   users {
     id
-    studentNumber
+    schoolNumber
+    location_visibility
   }
 }
 
 # 特定のユーザーを取得するクエリ
 query getUserById {
-  user(id: 5) {
+  user(id: 1) {
     id
-    studentNumber
+    schoolNumber
   }
 }
 
 # ユーザーを作成するミューテーション
 mutation createUser {
   createUser(createUserInput: {
-    studentNumber: 123456
+    schoolNumber: 123456
   }) {
     id
-    studentNumber
+    schoolNumber
   }
 }
 
 # ユーザーを更新するミューテーション
 mutation updateUser {
   updateUser(updateUserInput: {
-    id: 5
-    studentNumber: 789012
+    id: 1
+    schoolNumber: 789012
+    location_visibility: false
   }) {
     id
-    studentNumber
+    schoolNumber
   }
 }
 
 # ユーザーを削除するミューテーション
 mutation deleteUser {
-  removeUser(id: 5) {
+  removeUser(id: 1) {
     id
   }
 }
