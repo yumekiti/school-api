@@ -7,6 +7,11 @@ input CreateUserInput {
   schoolNumber: Float!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   removeUser(id: Int!): User!
@@ -34,6 +39,9 @@ input UpdateUserInput {
 }
 
 type User {
+  """Created at"""
+  created_at: DateTime!
+
   """ID"""
   id: Int!
 
@@ -42,4 +50,7 @@ type User {
 
   """School number"""
   schoolNumber: Int!
+
+  """Updated at"""
+  updated_at: DateTime!
 }
