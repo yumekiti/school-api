@@ -9,5 +9,6 @@ import { RoomsModule } from '../rooms/rooms.module'
 @Module({
   imports: [TypeOrmModule.forFeature([AccessPoint]), WifiNetworksModule, RoomsModule],
   providers: [AccessPointsResolver, AccessPointsService],
+  exports: [AccessPointsService],
 })
 export class AccessPointsModule {}

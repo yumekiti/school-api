@@ -58,7 +58,12 @@ input CreateRoomInput {
 
 input CreateUserInput {
   """Student number"""
-  schoolNumber: Float!
+  school_number: Float!
+}
+
+input CreateUserLocationInput {
+  """アクセスポイント"""
+  access_point: CreateAccessPointInput!
 }
 
 input CreateWifiNetworkInput {
@@ -87,14 +92,17 @@ type Mutation {
   createAccessPoint(createAccessPointInput: CreateAccessPointInput!): AccessPoint!
   createRoom(createRoomInput: CreateRoomInput!): Room!
   createUser(createUserInput: CreateUserInput!): User!
+  createUserLocation(createUserLocationInput: CreateUserLocationInput!): UserLocation!
   createWifiNetwork(createWifiNetworkInput: CreateWifiNetworkInput!): WifiNetwork!
   removeAccessPoint(id: Int!): AccessPoint!
   removeRoom(id: Int!): Room!
   removeUser(id: Int!): User!
+  removeUserLocation(id: Int!): UserLocation!
   removeWifiNetwork(id: Int!): WifiNetwork!
   updateAccessPoint(updateAccessPointInput: UpdateAccessPointInput!): AccessPoint!
   updateRoom(updateRoomInput: UpdateRoomInput!): Room!
   updateUser(updateUserInput: UpdateUserInput!): User!
+  updateUserLocation(updateUserLocationInput: UpdateUserLocationInput!): UserLocation!
   updateWifiNetwork(updateWifiNetworkInput: UpdateWifiNetworkInput!): WifiNetwork!
 }
 
@@ -111,6 +119,8 @@ type Query {
   room(id: Int!): Room!
   rooms: [Room!]!
   user(id: Int!): User!
+  userLocation(id: Int!): UserLocation!
+  userLocations: [UserLocation!]!
   users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
   wifiNetwork(id: Int!): WifiNetwork!
   wifiNetworks: [WifiNetwork!]!
@@ -131,6 +141,9 @@ type Room {
 
   """Updated at"""
   updated_at: DateTime!
+
+  """ユーザー位置"""
+  user_locations: [UserLocation!]!
 }
 
 input UpdateAccessPointInput {
@@ -163,7 +176,13 @@ input UpdateUserInput {
   location_visibility: Boolean
 
   """Student number"""
-  schoolNumber: Float
+  school_number: Float
+}
+
+input UpdateUserLocationInput {
+  """アクセスポイント"""
+  access_point: CreateAccessPointInput
+  id: Int!
 }
 
 input UpdateWifiNetworkInput {
@@ -196,10 +215,36 @@ type User {
   location_visibility: Boolean!
 
   """School number"""
-  schoolNumber: Int!
+  school_number: Int!
 
   """Updated at"""
   updated_at: DateTime!
+
+  """User location"""
+  user_locations: [UserLocation!]!
+}
+
+type UserLocation {
+  """Created at"""
+  created_at: DateTime!
+
+  """ID"""
+  id: Int!
+
+  """部屋"""
+  room: Room!
+
+  """部屋ID"""
+  room_id: Int!
+
+  """Updated at"""
+  updated_at: DateTime!
+
+  """ユーザー"""
+  user: User!
+
+  """ユーザーID"""
+  user_id: Int!
 }
 
 type WifiNetwork {

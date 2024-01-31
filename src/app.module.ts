@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { WifiNetworksModule } from './wifi-networks/wifi-networks.module';
 import { AccessPointsModule } from './access-points/access-points.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { UserLocationsModule } from './user-locations/user-locations.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RoomsModule } from './rooms/rooms.module';
     WifiNetworksModule,
     AccessPointsModule,
     RoomsModule,
+    UserLocationsModule,
   ],
 })
 export class AppModule {}

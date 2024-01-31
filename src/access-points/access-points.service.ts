@@ -69,4 +69,11 @@ export class AccessPointsService {
     this.accessPointRepository.delete({ id });
     return accessPoint;
   }
+
+  async findOneByBssid(bssid: string): Promise<AccessPoint> {
+    return await this.accessPointRepository.findOne({
+      where: { bssid },
+      relations: ['wifi', 'room'],
+    });
+  }
 }
