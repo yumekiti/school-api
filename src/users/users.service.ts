@@ -19,7 +19,10 @@ export class UsersService {
   }
 
   // pagination: {page: 1, pageSize: 10, start: 0, limit: 10}, sort: "id:asc"
-  async findAll(paginationArgs: PaginationArgs, sortArgs: SortArgs): Promise<User[]> {
+  async findAll(
+    paginationArgs: PaginationArgs,
+    sortArgs: SortArgs,
+  ): Promise<User[]> {
     const { page, pageSize, start, limit } = paginationArgs.pagination;
     const { sort } = sortArgs;
     return await this.userRepository.find({

@@ -9,7 +9,10 @@ export class WifiNetworksResolver {
   constructor(private readonly wifiNetworksService: WifiNetworksService) {}
 
   @Mutation(() => WifiNetwork)
-  createWifiNetwork(@Args('createWifiNetworkInput') createWifiNetworkInput: CreateWifiNetworkInput) {
+  createWifiNetwork(
+    @Args('createWifiNetworkInput')
+    createWifiNetworkInput: CreateWifiNetworkInput,
+  ) {
     return this.wifiNetworksService.create(createWifiNetworkInput);
   }
 
@@ -24,8 +27,14 @@ export class WifiNetworksResolver {
   }
 
   @Mutation(() => WifiNetwork)
-  updateWifiNetwork(@Args('updateWifiNetworkInput') updateWifiNetworkInput: UpdateWifiNetworkInput) {
-    return this.wifiNetworksService.update(updateWifiNetworkInput.id, updateWifiNetworkInput);
+  updateWifiNetwork(
+    @Args('updateWifiNetworkInput')
+    updateWifiNetworkInput: UpdateWifiNetworkInput,
+  ) {
+    return this.wifiNetworksService.update(
+      updateWifiNetworkInput.id,
+      updateWifiNetworkInput,
+    );
   }
 
   @Mutation(() => WifiNetwork)

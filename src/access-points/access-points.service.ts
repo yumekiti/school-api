@@ -14,12 +14,16 @@ export class AccessPointsService {
     private readonly wifiNetworksService: WifiNetworksService,
   ) {}
 
-  async create(createAccessPointInput: CreateAccessPointInput): Promise<AccessPoint> {
+  async create(
+    createAccessPointInput: CreateAccessPointInput,
+  ): Promise<AccessPoint> {
     const { ssid } = createAccessPointInput.wifi;
 
     let wifiNetwork = await this.wifiNetworksService.findOneBySsid(ssid);
     if (!wifiNetwork) {
-      wifiNetwork = await this.wifiNetworksService.create(createAccessPointInput.wifi);
+      wifiNetwork = await this.wifiNetworksService.create(
+        createAccessPointInput.wifi,
+      );
     }
 
     return await this.accessPointRepository.save({
@@ -33,16 +37,28 @@ export class AccessPointsService {
   }
 
   findOne(id: number): Promise<AccessPoint> {
-    return this.accessPointRepository.findOne({ where: { id }, relations: ['wifi'] });
+    return this.accessPointRepository.findOne({
+      where: { id },
+      relations: ['wifi'],
+    });
   }
 
-  update(id: number, updateAccessPointInput: UpdateAccessPointInput): Promise<AccessPoint> {
+  update(
+    id: number,
+    updateAccessPointInput: UpdateAccessPointInput,
+  ): Promise<AccessPoint> {
     this.accessPointRepository.update({ id }, updateAccessPointInput);
-    return this.accessPointRepository.findOne({ where: { id }, relations: ['wifi'] });
+    return this.accessPointRepository.findOne({
+      where: { id },
+      relations: ['wifi'],
+    });
   }
 
   remove(id: number): Promise<AccessPoint> {
-    const accessPoint = this.accessPointRepository.findOne({ where: { id }, relations: ['wifi'] });
+    const accessPoint = this.accessPointRepository.findOne({
+      where: { id },
+      relations: ['wifi'],
+    });
     this.accessPointRepository.delete({ id });
     return accessPoint;
   }

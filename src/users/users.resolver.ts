@@ -16,10 +16,7 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll(
-    @Args() paginationArgs: PaginationArgs,
-    @Args() sortArgs: SortArgs,
-  ) {
+  findAll(@Args() paginationArgs: PaginationArgs, @Args() sortArgs: SortArgs) {
     return this.usersService.findAll(paginationArgs, sortArgs);
   }
 

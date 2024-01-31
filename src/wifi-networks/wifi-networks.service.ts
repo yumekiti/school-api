@@ -24,7 +24,10 @@ export class WifiNetworksService {
     return this.wifiNetworkRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateWifiNetworkInput: UpdateWifiNetworkInput): Promise<WifiNetwork> {
+  update(
+    id: number,
+    updateWifiNetworkInput: UpdateWifiNetworkInput,
+  ): Promise<WifiNetwork> {
     this.wifiNetworkRepository.update({ id }, updateWifiNetworkInput);
     return this.wifiNetworkRepository.findOne({ where: { id } });
   }

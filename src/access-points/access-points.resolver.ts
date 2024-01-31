@@ -9,7 +9,10 @@ export class AccessPointsResolver {
   constructor(private readonly accessPointsService: AccessPointsService) {}
 
   @Mutation(() => AccessPoint)
-  createAccessPoint(@Args('createAccessPointInput') createAccessPointInput: CreateAccessPointInput) {
+  createAccessPoint(
+    @Args('createAccessPointInput')
+    createAccessPointInput: CreateAccessPointInput,
+  ) {
     return this.accessPointsService.create(createAccessPointInput);
   }
 
@@ -24,8 +27,14 @@ export class AccessPointsResolver {
   }
 
   @Mutation(() => AccessPoint)
-  updateAccessPoint(@Args('updateAccessPointInput') updateAccessPointInput: UpdateAccessPointInput) {
-    return this.accessPointsService.update(updateAccessPointInput.id, updateAccessPointInput);
+  updateAccessPoint(
+    @Args('updateAccessPointInput')
+    updateAccessPointInput: UpdateAccessPointInput,
+  ) {
+    return this.accessPointsService.update(
+      updateAccessPointInput.id,
+      updateAccessPointInput,
+    );
   }
 
   @Mutation(() => AccessPoint)

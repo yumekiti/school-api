@@ -1,6 +1,14 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { WifiNetwork } from 'src/wifi-networks/entities/wifi-network.entity';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 /*
 - アクセスポイントID (access_point_id) - 主キー
@@ -29,7 +37,7 @@ export class AccessPoint {
   @Field(() => Int, { description: '周波数' })
   frequency: number;
 
-  @ManyToOne(() => WifiNetwork, wifiNetwork => wifiNetwork.accessPoints)
+  @ManyToOne(() => WifiNetwork, (wifiNetwork) => wifiNetwork.accessPoints)
   @JoinColumn({ name: 'wifi_id' })
   @Field(() => WifiNetwork, { description: 'WiFi' })
   wifi: WifiNetwork;
