@@ -13,7 +13,7 @@ services:
     command: >
       sh -c "
         yarn &&
-        yarn start
+        yarn start:dev
       "
 
   db:
