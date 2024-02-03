@@ -17,22 +17,34 @@ export class User {
   id: number;
 
   @Column()
-  @Field(() => Int, { description: 'School number' })
+  @Field(() => Int, { description: '学籍番号' })
   school_number: number;
 
-  @Column({ default: false })
-  @Field(() => Boolean, { description: 'Location visibility' })
-  location_visibility: boolean;
+  @Column()
+  @Field(() => String, { description: '名前' })
+  username: string;
+
+  @Column()
+  @Field(() => String, { description: 'クラス名' })
+  class_name: string;
+
+  @Column()
+  @Field(() => String, { description: '出席番号' })
+  attendance_number: string;
+
+  @Column()
+  @Field(() => Boolean, { description: '呼び出し状態' })
+  is_calling: boolean;
 
   @OneToMany(() => UserLocation, (userLocation) => userLocation.user)
-  @Field(() => [UserLocation], { description: 'User location' })
+  @Field(() => [UserLocation], { description: 'ユーザーの位置情報' })
   user_locations: UserLocation[];
 
   @CreateDateColumn()
-  @Field(() => Date, { description: 'Created at' })
+  @Field(() => Date, { description: '作成日時' })
   created_at: Date;
 
   @UpdateDateColumn()
-  @Field(() => Date, { description: 'Updated at' })
+  @Field(() => Date, { description: '更新日時' })
   updated_at: Date;
 }

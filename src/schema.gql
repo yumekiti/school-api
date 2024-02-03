@@ -205,23 +205,32 @@ input UpdateWifiNetworkInput {
 }
 
 type User {
-  """Created at"""
+  """出席番号"""
+  attendance_number: String!
+
+  """クラス名"""
+  class_name: String!
+
+  """作成日時"""
   created_at: DateTime!
 
   """ID"""
   id: Int!
 
-  """Location visibility"""
-  location_visibility: Boolean!
+  """呼び出し状態"""
+  is_calling: Boolean!
 
-  """School number"""
+  """学籍番号"""
   school_number: Int!
 
-  """Updated at"""
+  """更新日時"""
   updated_at: DateTime!
 
-  """User location"""
+  """ユーザーの位置情報"""
   user_locations: [UserLocation!]!
+
+  """名前"""
+  username: String!
 }
 
 type UserLocation {
