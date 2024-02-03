@@ -25,3 +25,12 @@ services:
       POSTGRES_DB: database
     volumes:
       - ./db/data:/var/lib/postgresql/data
+
+  tbls:
+    image: k1low/tbls
+    working_dir: /work
+    volumes:
+      - ./:/work
+    command: doc
+    depends_on:
+      - db
