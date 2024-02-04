@@ -34,4 +34,9 @@ export class UsersResolver {
   removeUser(@Args('id', { type: () => Int }) id: number) {
     return this.usersService.remove(id);
   }
+
+  @Query(() => User, { name: 'userByUuid' })
+  findOneByUuid(@Args('uuid', { type: () => String }) uuid: string) {
+    return this.usersService.findOneByUuid(uuid);
+  }
 }

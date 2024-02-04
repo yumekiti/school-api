@@ -6,6 +6,6 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   @Field(() => Int)
   id: number;
 
-  @Field(() => Boolean, { nullable: true })
-  location_visibility?: boolean;
+  @Field(() => Boolean, { description: 'Calling status' })
+  is_calling: boolean;
 }

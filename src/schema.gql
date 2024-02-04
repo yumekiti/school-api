@@ -53,12 +53,24 @@ input CreateAccessPointInput {
 
 input CreateRoomInput {
   """部屋名"""
-  room_name: String!
+  name: String!
 }
 
 input CreateUserInput {
+  """Attendance number"""
+  attendance_number: Int!
+
+  """Class name"""
+  class_name: String!
+
   """Student number"""
   school_number: Float!
+
+  """Name"""
+  username: String!
+
+  """UUID"""
+  uuid: String!
 }
 
 input CreateUserLocationInput {
@@ -92,7 +104,7 @@ type Mutation {
   createAccessPoint(createAccessPointInput: CreateAccessPointInput!): AccessPoint!
   createRoom(createRoomInput: CreateRoomInput!): Room!
   createUser(createUserInput: CreateUserInput!): User!
-  createUserLocation(createUserLocationInput: CreateUserLocationInput!): UserLocation!
+  createUserLocation(createUserLocationInput: CreateUserLocationInput!, school_number: Int! = 0): UserLocation!
   createWifiNetwork(createWifiNetworkInput: CreateWifiNetworkInput!): WifiNetwork!
   removeAccessPoint(id: Int!): AccessPoint!
   removeRoom(id: Int!): Room!
@@ -119,6 +131,7 @@ type Query {
   room(id: Int!): Room!
   rooms: [Room!]!
   user(id: Int!): User!
+  userByUuid(uuid: String!): User!
   userLocation(id: Int!): UserLocation!
   userLocations: [UserLocation!]!
   users(pagination: Pagination! = {page: 1, pageSize: 10}, sort: String = "id:asc"): [User!]!
@@ -137,7 +150,7 @@ type Room {
   id: Int!
 
   """部屋名"""
-  room_name: String!
+  name: String!
 
   """Updated at"""
   updated_at: DateTime!
@@ -168,15 +181,28 @@ input UpdateRoomInput {
   id: Int!
 
   """部屋名"""
-  room_name: String
+  name: String
 }
 
 input UpdateUserInput {
+  """Attendance number"""
+  attendance_number: Int
+
+  """Class name"""
+  class_name: String
   id: Int!
-  location_visibility: Boolean
+
+  """Calling status"""
+  is_calling: Boolean!
 
   """Student number"""
   school_number: Float
+
+  """Name"""
+  username: String
+
+  """UUID"""
+  uuid: String
 }
 
 input UpdateUserLocationInput {
@@ -206,7 +232,7 @@ input UpdateWifiNetworkInput {
 
 type User {
   """出席番号"""
-  attendance_number: String!
+  attendance_number: Int!
 
   """クラス名"""
   class_name: String!
@@ -231,6 +257,9 @@ type User {
 
   """名前"""
   username: String!
+
+  """UUID"""
+  uuid: String!
 }
 
 type UserLocation {

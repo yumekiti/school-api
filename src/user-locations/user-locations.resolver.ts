@@ -3,6 +3,7 @@ import { UserLocationsService } from './user-locations.service';
 import { UserLocation } from './entities/user-location.entity';
 import { CreateUserLocationInput } from './dto/create-user-location.input';
 import { UpdateUserLocationInput } from './dto/update-user-location.input';
+import { SchoolNumberArgs } from './dto/school_number.args';
 
 @Resolver(() => UserLocation)
 export class UserLocationsResolver {
@@ -12,8 +13,12 @@ export class UserLocationsResolver {
   createUserLocation(
     @Args('createUserLocationInput')
     createUserLocationInput: CreateUserLocationInput,
+    @Args() schoolNumberArgs: SchoolNumberArgs,
   ) {
-    return this.userLocationsService.create(createUserLocationInput);
+    return this.userLocationsService.create(
+      createUserLocationInput,
+      schoolNumberArgs,
+    );
   }
 
   @Query(() => [UserLocation], { name: 'userLocations' })

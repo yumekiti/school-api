@@ -23,7 +23,7 @@ export class Room {
 
   @Column()
   @Field(() => String, { description: '部屋名' })
-  room_name: string;
+  name: string;
 
   @Field(() => [AccessPoint], { description: 'アクセスポイント' })
   access_points: AccessPoint[];

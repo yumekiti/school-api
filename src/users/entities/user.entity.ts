@@ -16,7 +16,7 @@ export class User {
   @Field(() => Int, { description: 'ID' })
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => Int, { description: '学籍番号' })
   school_number: number;
 
@@ -29,12 +29,16 @@ export class User {
   class_name: string;
 
   @Column()
-  @Field(() => String, { description: '出席番号' })
-  attendance_number: string;
+  @Field(() => Int, { description: '出席番号' })
+  attendance_number: Number;
 
-  @Column()
+  @Column({ default: false })
   @Field(() => Boolean, { description: '呼び出し状態' })
   is_calling: boolean;
+
+  @Column({ unique: true })
+  @Field(() => String, { description: 'UUID' })
+  uuid: string;
 
   @OneToMany(() => UserLocation, (userLocation) => userLocation.user)
   @Field(() => [UserLocation], { description: 'ユーザーの位置情報' })

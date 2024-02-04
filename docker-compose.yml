@@ -10,6 +10,8 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
+    environment:
+      TZ: UTC
     command: >
       sh -c "
         yarn &&
@@ -23,6 +25,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
+      TZ: UTC
     volumes:
       - ./db/data:/var/lib/postgresql/data
 

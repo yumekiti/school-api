@@ -20,7 +20,7 @@ export class AccessPointsService {
     createAccessPointInput: CreateAccessPointInput,
   ): Promise<AccessPoint> {
     const { ssid } = createAccessPointInput.wifi;
-    const { room_name } = createAccessPointInput.room;
+    const { name: room_name } = createAccessPointInput.room;
 
     let room = await this.roomsService.findOneByName(room_name);
     if (!room) {

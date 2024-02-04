@@ -35,7 +35,7 @@ export class RoomsService {
     return room;
   }
 
-  findOneByName(room_name: string): Promise<Room> {
-    return this.roomsRepository.findOne({ where: { room_name } });
+  findOneByName(name: string): Promise<Room> {
+    return this.roomsRepository.findOne({ where: { name } });
   }
 }
